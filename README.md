@@ -1,6 +1,4 @@
-# megax4
-
-ATmega644/644P/1284P core for Arduino IDE 1.6.7
+# ATmega644/644P/1284P core for Arduino IDE 1.6.7
 
 This core adds full support for Atmel ATmega644/644P & ATmega1284P microcontrollers into
 the Arduino IDE versions >= 1.6.7.
