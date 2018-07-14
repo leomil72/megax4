@@ -1,4 +1,4 @@
-# ATmega644P/1284P core for Arduino IDE 1.6.7
+# ATmega644P/1284P core for Arduino IDE 1.6.7 and above
 
 This core adds full support for ATmega644P and ATmeg1284P microcontrollers
 into the Arduino IDE.
@@ -8,7 +8,7 @@ into the Arduino IDE.
 
 ### Installation
 
-1) Close the IDE and, if you manually installed it in the past, remove the 
+1) Close the IDE and, if you manually installed it in the past, remove the
 old core from your_sketchbook_folder/hardware
 
 2) Restart the IDE, then select "File/Preferences" from the menu
@@ -72,7 +72,7 @@ RX)--+-[R 10K]-- // -------- (TX
      |
     ___
      _
-     
+
 
 For more informations on cores, libraries and other stuff for Arduino and Atmel
 microcontrollers, see my website at: http://www.leonardomiliani.com
@@ -89,7 +89,7 @@ You could use ATmega644 and ATmega1284 too, but:
 
 ### Credits & warranty
 
-This is core is: 
+This is core is:
 - based on core Mighty-1284p by maniacbug
 - based on Optiboot 4.5 by westfm
 
