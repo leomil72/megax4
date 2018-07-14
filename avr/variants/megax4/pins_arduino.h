@@ -2,7 +2,8 @@
 //
 // Pins definitions for Atmega644/1284P
 // Original file from Maniacbug's Mighty-1284 core
-// Modded and fixed by Leonardo Miliani
+// Modded and fixed by Leonardo Miliani (leo72)
+// Some small addition by Guglielmo Braguglia (gpb01)
 //
 //
 
@@ -23,7 +24,7 @@
 // PCINT14/OC3A/MISO (D6 ) PB6  7|~*      |34  PA6 (A6 / D30)/PCINT6
 //  PCINT15/OC3B/SCK (D7 ) PB7  8|~*      |33  PA7 (A7 / D31)/PCINT7
 //                         RST  9|        |32  AREF
-//                         VCC 10|        |31  GND 
+//                         VCC 10|        |31  GND
 //                         GND 11|        |30  AVCC
 //                       XTAL2 12|        |29  PC7 (D23) TOSC2/PCINT23
 //                       XTAL1 13|        |28  PC6 (D22) TOSC1/PCINT22
@@ -56,14 +57,21 @@
 #define digitalPinHasPWM(p)         ((p) == 3 || (p) == 4 || (p) == 12 || (p) == 13 || (p) == 14 || (p) == 15)
 #endif
 
+#define LED_BUILTIN 13              // For the ProMidi 1284P board - gpb01
+#define SWC_BUILTIN 12              // For the ProMidi 1284P board - gpb01
+
 static const uint8_t SS   = 4;
 static const uint8_t MOSI = 5;
 static const uint8_t MISO = 6;
 static const uint8_t SCK  = 7;
 
+static const uint8_t RX0  =  8;     // gpb01
+static const uint8_t TX0  =  9;     // gpb01
+static const uint8_t RX1  = 10;     // gpb01
+static const uint8_t TX1  = 11;     // gpb01
+
 static const uint8_t SDA = 17;
 static const uint8_t SCL = 16;
-static const uint8_t LED = 13;
 
 static const uint8_t A0 = 24;
 static const uint8_t A1 = 25;
@@ -74,10 +82,16 @@ static const uint8_t A5 = 29;
 static const uint8_t A6 = 30;
 static const uint8_t A7 = 31;
 
+#ifndef NOT_AN_INTERRUPT            // gpb01
+#define NOT_AN_INTERRUPT -1         // gpb01
+#endif                              // gpb01
+
 #define digitalPinToPCICR(p)    (((p) >= 0 && (p) < NUM_DIGITAL_PINS) ? (&PCICR) : ((uint8_t *)0))
 #define digitalPinToPCICRbit(p) (((p) <= 7) ? 1 : (((p) <= 15) ? 3 : (((p) <= 23) ? 2 : 0)))
 #define digitalPinToPCMSK(p)    (((p) <= 7) ? (&PCMSK2) : (((p) <= 13) ? (&PCMSK0) : (((p) <= 21) ? (&PCMSK1) : ((uint8_t *)0))))
 #define digitalPinToPCMSKbit(p) ((p) % 8)
+
+#define digitalPinToInterrupt(p) ( (p) == 10 ? 0 : ( (p) == 11 ? 1 : ( (p) == 2 ? 2 : NOT_AN_INTERRUPT ) ) )   // gpb01
 
 #ifdef ARDUINO_MAIN
 
@@ -196,7 +210,7 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] =
 	TIMER0A,		/* 3  - PB3 */
 	TIMER0B,		/* 4  - PB4 */
 	NOT_ON_TIMER, 	/* 5  - PB5 */
-#if defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__) 
+#if defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__)
 	TIMER3A,		/* 6  - PB6 */
 	TIMER3B,		/* 7  - PB7 */
 #else
